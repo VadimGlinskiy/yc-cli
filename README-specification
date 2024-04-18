@@ -1,0 +1,6 @@
+yc compute instance-group create --file specification.yaml
+yc load-balancer network-load-balancer create --name my-load-balancer --region-id ru-central1 --listener name=my-listener,external-ip-version=ipv4,port=80
+yc load-balancer network-load-balancer attach-target-group my-load-balancer   --target-group target-group-id=enprqr32k9ipvg9s84ss,healthcheck-name=test-health-check,healthcheck-interval=2s,healthcheck-timeout=1s,healthcheck-unhealthythreshold=2,healthcheck-healthythreshold=2,healthcheck-http-port=80
+узнаем работают ли хосты
+yc load-balancer network-load-balancer target-states my-load-balancer     --target-group-id enprqr32k9ipvg9s84ss
+проверяем работу на практике, по ip адресу балансировщика(yc load-balancer network-load-balancer get --name my-load-balancer 
